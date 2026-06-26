@@ -53,8 +53,13 @@ Extract the information you'll need to write the explainer:
 
 ## Step 2 — Prepare figures
 
-- **Prefer original figures**: `scripts/fetch_paper.sh` already extracted source figures into `html/images/`. Pick the clearest, most informative ones, reference them as `<img src="images/xxx.png">`, and write a caption explaining "what this figure shows and how to read it" (in the target language).
-- **No source / need a specific page**: screenshot the PDF (on macOS use `pdftoppm -png -r 150 -f <page> -l <page> paper.pdf out`, or `sips`; you can also read the PDF page with the Read tool and describe it). Save screenshots into `html/images/`.
+- **Prefer original figures**: `scripts/fetch_paper.sh` already extracted raster figures (png/jpg) into `html/images/`. Pick the clearest, most informative ones, reference them as `<img src="images/xxx.png">`, and write a caption explaining "what this figure shows and how to read it" (in the target language).
+- **Vector figures (`.pdf`/`.eps`) must be converted to PNG** — many arXiv papers ship figures as PDF. Use the bundled helper, which renders the **whole** figure at high resolution:
+  ```
+  bash <skill-dir>/scripts/pdf_to_png.sh tex/figures/teaser.pdf html/images/teaser.png 1400
+  ```
+  ⚠️ **Do NOT use `sips -s format png` on a vector PDF** — it silently **crops/clips** the figure (commonly the left edge). The helper uses macOS `qlmanage` (renders the full figure), then `pdftoppm`/`magick`/`sips` as fallbacks. **After converting, always open the PNG with the Read tool and verify nothing is cut off** (titles, left/right columns, edges) before using it.
+- **No source / need a specific page**: screenshot the PDF page (`pdftoppm -png -r 150 -f <page> -l <page> paper.pdf out`, or read the PDF page with the Read tool and describe it). Save into `html/images/`.
 - **When a redraw is clearer**: draw the diagram with **inline SVG or plain HTML/CSS** (flows, loops, side-by-side comparisons) — never depend on an external image host. The goal of a redraw is to make it understandable to a total beginner: numbered steps, two-column comparisons, etc.
 
 ---

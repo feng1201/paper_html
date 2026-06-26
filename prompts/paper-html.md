@@ -28,7 +28,7 @@ Your task: turn the paper the user gives into an **easy-to-understand HTML expla
 
 3. **Read the paper, extract the skeleton**: read the main `.tex` in `tex/` (or the PDF if no source), and pull out the pain point, core idea, architecture, results, limitations, conclusion.
 
-4. **Handle figures**: prefer original figures in `html/images/`; if no source, screenshot the PDF (`pdftoppm`/`sips`); redraw with inline SVG/HTML when clearer.
+4. **Handle figures**: prefer original figures in `html/images/`. Convert vector `.pdf`/`.eps` figures to PNG with `bash "$PAPER_HTML_DIR/scripts/pdf_to_png.sh" <in.pdf> html/images/<out.png> 1400` — **never `sips -s format png` on a vector PDF (it crops the figure)**. After converting, open the PNG and verify nothing is cut off. Redraw with inline SVG/HTML when clearer.
 
 5. **Write the HTML**: copy `template.html` as the skeleton and fill it per the writing-style guide — plain words, everyday analogies, one-sentence summary, TOC, results comparison table, honest limitations, FAQ; translate equations into plain words; self-contained, openable offline. Write in the language from the output-language rule.
 

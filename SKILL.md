@@ -25,7 +25,7 @@ Turn a paper (in any input form) into an explainer a total outsider can understa
 
 3. **Read + extract skeleton**: read the main `.tex` in `tex/` (or the PDF if no source), and extract pain point, core idea, architecture, results, limitations, conclusion.
 
-4. **Handle figures**: prefer original figures in `html/images/`; if there's no source, screenshot the PDF (`pdftoppm`/`sips`); redraw with inline SVG/HTML when that's clearer.
+4. **Handle figures**: prefer original figures in `html/images/`. Convert vector `.pdf`/`.eps` figures to PNG with `bash <skill-dir>/scripts/pdf_to_png.sh <in.pdf> html/images/<out.png> 1400` — **never `sips -s format png` on a vector PDF (it crops the figure)**. After converting, open the PNG with Read and verify nothing is cut off. Redraw with inline SVG/HTML when that's clearer.
 
 5. **Write the HTML**: copy `reference/template.html` as the skeleton and fill it per `reference/writing-style.md` — plain words, analogies, one-sentence summary, TOC, results table, honest limitations, FAQ. Write in the language chosen by the output-language rule.
 
