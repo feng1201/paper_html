@@ -1,43 +1,43 @@
-# paper_html
+<div align="center">
 
-Turn any academic paper into an **easy-to-understand HTML explainer** — readable by a complete outsider.
+# 📄 → 🌐 paper_html
 
-Accepts many input forms: **arXiv ID / arXiv URL / PDF URL / local PDF / or just a paper title** (auto web-search to locate it).
+**Turn any academic paper into an HTML explainer a complete outsider can understand**
 
-Works with both **Claude Code** and **Codex**.
+A skill for both **Claude Code** and **Codex** —
+give it an arXiv ID / URL / PDF / or just a title, and it auto-downloads, archives, and writes a plain-language explainer web page with figures.
 
-The explainer's **language follows your conversation language**: if you talk to the agent in Chinese it produces Chinese; otherwise it defaults to English.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-skill-8A5CF6)
+![Codex](https://img.shields.io/badge/Codex-prompt-10A37F)
+![Lang](https://img.shields.io/badge/output-English%20%7C%20中文-orange)
+[![Stars](https://img.shields.io/github/stars/feng1201/paper_html?style=flat)](https://github.com/feng1201/paper_html/stargazers)
 
-> 中文说明见 [README.md](README.md)。
+[中文](README.md) · **English**
+
+<img src="assets/demo.jpg" width="760" alt="Example explainer page produced by paper_html">
+
+<sub>↑ A slice of the explainer auto-generated for the paper MCOUT (arXiv:2508.12587)</sub>
+
+</div>
+
+---
+
+## ✨ What it does
+
+Give it a paper, and it automatically:
+
+1. **📥 Downloads & archives** — the PDF, the arXiv LaTeX source, and the original figures, sorted into folders.
+2. **📖 Reads the paper** — extracts the pain point, core idea, method, results, and limitations.
+3. **🌐 Writes an HTML explainer** — plain words + everyday analogies + figures + a results table + an FAQ. **Self-contained, openable offline.**
+
+> The explainer's **language follows your conversation language**: talk to the agent in Chinese and it produces Chinese; otherwise it defaults to English.
 >
 > This skill was built with the help of Codex and Claude Code.
 
 ---
 
-## What it does
-
-Give it a paper, and it automatically:
-
-1. **Downloads and archives**: the PDF, the arXiv LaTeX source, and the paper's original figures — sorted into folders.
-2. **Reads the paper**: extracts the pain point, core idea, method, results, and limitations.
-3. **Writes an HTML explainer**: in plain words + everyday analogies + figures + a results table + an FAQ. Self-contained, openable offline.
-
-The output layout looks like:
-
-```
-<paper-name>/
-├── pdf/                       original paper PDF
-├── tex/                       arXiv LaTeX source (with original figures)
-└── html/
-    ├── images/                original figures
-    └── keyword-abbrev.html    the plain-language explainer
-```
-
-HTML filename rule: `<3-6 keyword>-<model/method abbreviation>.html`, e.g. `latent-reasoning-MCOUT.html` (or `潜空间推理-MCOUT.html` in Chinese).
-
----
-
-## Input forms (pick any)
+## 🎯 Supported inputs (pick any)
 
 | What you have | How you pass it |
 |---|---|
@@ -47,13 +47,23 @@ HTML filename rule: `<3-6 keyword>-<model/method abbreviation>.html`, e.g. `late
 | Local PDF file | `/path/to/paper.pdf` |
 | Only a title | `Multimodal Chain of Continuous Thought` (it searches and confirms with you first) |
 
+Output layout:
+
+```
+<paper-name>/
+├── pdf/                       original paper PDF
+├── tex/                       arXiv LaTeX source (with original figures)
+└── html/
+    ├── images/                original figures
+    └── keyword-abbrev.html    the explainer (e.g. latent-reasoning-MCOUT.html)
+```
+
 ---
 
-## Install & use
+## 🚀 Install & use
 
-### 1. Claude Code
-
-Put this repo into Claude Code's skills directory (project- or user-level):
+<details open>
+<summary><b>① Claude Code</b></summary>
 
 ```bash
 git clone https://github.com/feng1201/paper_html.git
@@ -69,10 +79,10 @@ Then in Claude Code, just ask, or use the skill:
 /paper-html 2508.12587
 Read https://arxiv.org/abs/2508.12587 and write an easy explainer web page
 ```
+</details>
 
-### 2. Codex
-
-Clone the repo and install the command into Codex's prompts directory:
+<details>
+<summary><b>② Codex</b></summary>
 
 ```bash
 git clone https://github.com/feng1201/paper_html.git
@@ -86,54 +96,48 @@ Then in Codex:
 ```
 /paper-html 2508.12587
 ```
+</details>
 
-### 3. As a plain script (any environment)
+<details>
+<summary><b>③ As a plain script (any environment)</b></summary>
 
 Just want to download a paper and write the explainer yourself:
 
 ```bash
 bash scripts/fetch_paper.sh 2508.12587 MCOUT_latent_reasoning ./papers
 ```
+</details>
 
 ---
 
-## Repo layout
+## 🧩 Repo layout
 
 ```
 paper_html/
-├── README.md                  Chinese (default)
-├── README.en.md               this file (English)
+├── README.md / README.en.md   Chinese (default) / English
 ├── SKILL.md                   Claude Code entry (skill definition)
-├── prompts/
-│   └── paper-html.md          Codex entry (/paper-html command)
+├── prompts/paper-html.md      Codex entry (/paper-html command)
 ├── reference/
 │   ├── workflow.md            core flow (single source of truth, shared)
-│   ├── writing-style.md       writing-style guide (how to be approachable)
+│   ├── writing-style.md       writing-style guide (how to stay approachable)
 │   └── template.html          HTML template (with self-contained color CSS)
-├── scripts/
-│   └── fetch_paper.sh         download script (PDF + source + figures)
-└── examples/                  sample output
+├── scripts/fetch_paper.sh     download script (PDF + source + figures)
+└── examples/                  sample output (MCOUT explainer)
 ```
 
-Both entry points (`SKILL.md` and `prompts/paper-html.md`) are thin shells; the real method lives in `reference/`, so editing one place updates both tools.
+Both entry points are thin shells; the real method lives in `reference/` — **edit one place, both tools update.**
 
 ---
 
-## Example
+## 💡 Design principles
 
-Using the paper [MCOUT (arXiv:2508.12587)](https://arxiv.org/abs/2508.12587), it produces an explainer page with original figures, analogies, a results table, and an FAQ. See `examples/` (this example is the Chinese-language output).
-
----
-
-## Design principles
-
-- **Explain it to a beginner**: every term gets an explanation and an analogy; equations are translated into plain words.
-- **Honest**: the paper's limitations and failure findings are spelled out, with why they matter.
-- **Self-contained**: images and styles are embedded; openable offline; no external image hosts.
-- **Faithful numbers**: all data defers to the original PDF.
+- **Explain it to a beginner** — every term gets an explanation and an analogy; equations become plain words.
+- **Honest** — the paper's limitations and failure findings are spelled out, with why they matter.
+- **Self-contained** — images and styles are embedded; openable offline; no external image hosts.
+- **Faithful numbers** — all data defers to the original PDF.
 
 ---
 
-## License
+## 📜 License
 
-MIT
+[MIT](LICENSE) © [feng1201](https://github.com/feng1201)
