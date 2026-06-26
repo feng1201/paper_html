@@ -15,6 +15,8 @@ give it an arXiv ID / URL / PDF / or just a title, and it auto-downloads, archiv
 
 [中文](README.md) · **English**
 
+**📑 Example HTML output:**
+
 <img src="assets/demo.jpg" width="760" alt="Example explainer page produced by paper_html">
 
 <sub>↑ A slice of the explainer auto-generated for the paper MCOUT (arXiv:2508.12587)</sub>
@@ -132,6 +134,7 @@ Both entry points are thin shells; the real method lives in `reference/` — **e
 ## 💡 Design principles
 
 - **Explain it to a beginner** — every term gets an explanation and an analogy; equations become plain words.
+- **Beautiful** — card-based layout, harmonious colors, responsive on phone and desktop; pleasant to read, not intimidating.
 - **Honest** — the paper's limitations and failure findings are spelled out, with why they matter.
 - **Self-contained** — images and styles are embedded; openable offline; no external image hosts.
 - **Faithful numbers** — all data defers to the original PDF.
