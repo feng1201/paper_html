@@ -1,95 +1,95 @@
 # paper_html
 
-Turn any academic paper into an **easy-to-understand HTML explainer** — readable by a complete outsider.
+把一篇学术论文，一键变成**通俗易懂的 HTML 解读**——给完全的外行也能看懂。
 
-Accepts many input forms: **arXiv ID / arXiv URL / PDF URL / local PDF / or just a paper title** (auto web-search to locate it).
+支持多种输入：**arXiv ID / arXiv 链接 / PDF 链接 / 本地 PDF / 甚至只给文章标题**（自动联网搜索定位）。
 
-Works with both **Claude Code** and **Codex**.
+同时适配 **Claude Code** 和 **Codex** 两种 AI 编程工具。
 
-The explainer's **language follows your conversation language**: if you talk to the agent in Chinese it produces Chinese; otherwise it defaults to English.
+解读的**语言跟随你的对话语言**：你用中文和它对话就生成中文；否则默认英文。
 
-> 中文说明见 [README.zh-CN.md](README.zh-CN.md)。
+> English version: [README.en.md](README.en.md).
 >
-> This skill was built with the help of Codex and Claude Code.
+> 本 skill 由 Codex 和 Claude Code 辅助完成。
 
 ---
 
-## What it does
+## 它能做什么
 
-Give it a paper, and it automatically:
+给它一篇论文，它会自动：
 
-1. **Downloads and archives**: the PDF, the arXiv LaTeX source, and the paper's original figures — sorted into folders.
-2. **Reads the paper**: extracts the pain point, core idea, method, results, and limitations.
-3. **Writes an HTML explainer**: in plain words + everyday analogies + figures + a results table + an FAQ. Self-contained, openable offline.
+1. **下载并归档**：PDF、arXiv LaTeX 源码、论文里的原图，分文件夹放好。
+2. **通读论文**：提炼出痛点、核心点子、方法、结果、局限。
+3. **写成 HTML 解读**：用大白话 + 生活比喻 + 配图 + 结果表 + FAQ 讲清楚，自包含、离线可打开。
 
-The output layout looks like:
+产出的目录长这样：
 
 ```
-<paper-name>/
-├── pdf/                       original paper PDF
-├── tex/                       arXiv LaTeX source (with original figures)
+<论文名>/
+├── pdf/                   论文原始 PDF
+├── tex/                   arXiv LaTeX 源码（含原图）
 └── html/
-    ├── images/                original figures
-    └── keyword-abbrev.html    the plain-language explainer
+    ├── images/           原文图片
+    └── 关键词-简称.html    通俗解读
 ```
 
-HTML filename rule: `<3-6 keyword>-<model/method abbreviation>.html`, e.g. `latent-reasoning-MCOUT.html` (or `潜空间推理-MCOUT.html` in Chinese).
+HTML 文件名规则：`<3-6字领域关键词>-<模型/方法简称>.html`，例如 `潜空间推理-MCOUT.html`。
 
 ---
 
-## Input forms (pick any)
+## 输入方式（任选其一）
 
-| What you have | How you pass it |
+| 你手上有什么 | 怎么给 |
 |---|---|
-| arXiv ID | `2508.12587` |
-| arXiv URL | `https://arxiv.org/abs/2508.12587` (abs/pdf/html all fine) |
-| PDF URL | `https://xxx.com/paper.pdf` |
-| Local PDF file | `/path/to/paper.pdf` |
-| Only a title | `Multimodal Chain of Continuous Thought` (it searches and confirms with you first) |
+| arXiv 编号 | `2508.12587` |
+| arXiv 链接 | `https://arxiv.org/abs/2508.12587`（abs/pdf/html 都行） |
+| 论文 PDF 链接 | `https://xxx.com/paper.pdf` |
+| 本地 PDF 文件 | `/path/to/paper.pdf` |
+| 只记得标题 | `Multimodal Chain of Continuous Thought`（会联网搜索并先和你确认） |
 
 ---
 
-## Install & use
+## 安装与使用
 
 ### 1. Claude Code
 
-Put this repo into Claude Code's skills directory (project- or user-level):
+把本仓库放进 Claude Code 的 skills 目录（项目级或用户级均可）：
 
 ```bash
 git clone https://github.com/feng1201/paper_html.git
-# user-level (available everywhere):
+# 用户级（全局可用）：
 ln -s "$(pwd)/paper_html" ~/.claude/skills/paper-html
-# or project-level:
-ln -s "$(pwd)/paper_html" <your-project>/.claude/skills/paper-html
+# 或项目级：
+ln -s "$(pwd)/paper_html" <你的项目>/.claude/skills/paper-html
 ```
 
-Then in Claude Code, just ask, or use the skill:
+然后在 Claude Code 里直接说，或用 skill：
 
 ```
 /paper-html 2508.12587
-Read https://arxiv.org/abs/2508.12587 and write an easy explainer web page
+读一下这篇论文 https://arxiv.org/abs/2508.12587，写成易懂的中文网页
 ```
 
 ### 2. Codex
 
-Clone the repo and install the command into Codex's prompts directory:
+克隆仓库，并把命令文件装到 Codex 的 prompts 目录：
 
 ```bash
 git clone https://github.com/feng1201/paper_html.git
-export PAPER_HTML_DIR="$(pwd)/paper_html"          # recommend adding to ~/.zshrc / ~/.bashrc
+export PAPER_HTML_DIR="$(pwd)/paper_html"          # 建议写进 ~/.zshrc / ~/.bashrc
 cp paper_html/prompts/paper-html.md ~/.codex/prompts/paper-html.md
-# open ~/.codex/prompts/paper-html.md and set $PAPER_HTML_DIR to the real path above
+# 打开 ~/.codex/prompts/paper-html.md，把里面的 $PAPER_HTML_DIR 改成上面的实际路径
 ```
 
-Then in Codex:
+然后在 Codex 里：
 
 ```
 /paper-html 2508.12587
 ```
 
-### 3. As a plain script (any environment)
+### 3. 直接当脚本用（任何环境）
 
-Just want to download a paper and write the explainer yourself:
+只想下载论文、自己写解读：
 
 ```bash
 bash scripts/fetch_paper.sh 2508.12587 MCOUT_latent_reasoning ./papers
@@ -97,40 +97,40 @@ bash scripts/fetch_paper.sh 2508.12587 MCOUT_latent_reasoning ./papers
 
 ---
 
-## Repo layout
+## 仓库结构
 
 ```
 paper_html/
-├── README.md                  this file (English, default)
-├── README.zh-CN.md            Chinese version
-├── SKILL.md                   Claude Code entry (skill definition)
+├── README.md                  中文说明（默认）
+├── README.en.md               英文说明
+├── SKILL.md                   Claude Code 入口（skill 定义）
 ├── prompts/
-│   └── paper-html.md          Codex entry (/paper-html command)
+│   └── paper-html.md          Codex 入口（/paper-html 命令）
 ├── reference/
-│   ├── workflow.md            core flow (single source of truth, shared)
-│   ├── writing-style.md       writing-style guide (how to be approachable)
-│   └── template.html          HTML template (with self-contained color CSS)
+│   ├── workflow.md            核心流程（两个工具共用的唯一真源）
+│   ├── writing-style.md       写作风格指南（怎么写得通俗）
+│   └── template.html          HTML 模板（自带配色 CSS）
 ├── scripts/
-│   └── fetch_paper.sh         download script (PDF + source + figures)
-└── examples/                  sample output
+│   └── fetch_paper.sh         下载脚本（PDF + 源码 + 图片）
+└── examples/                  示例产出
 ```
 
-Both entry points (`SKILL.md` and `prompts/paper-html.md`) are thin shells; the real method lives in `reference/`, so editing one place updates both tools.
+两个入口（`SKILL.md` 与 `prompts/paper-html.md`）都只是薄壳，真正的方法写在 `reference/` 里，改一处两个工具同时生效。
 
 ---
 
-## Example
+## 示例
 
-Using the paper [MCOUT (arXiv:2508.12587)](https://arxiv.org/abs/2508.12587), it produces an explainer page with original figures, analogies, a results table, and an FAQ. See `examples/` (this example is the Chinese-language output).
+以论文 [MCOUT (arXiv:2508.12587)](https://arxiv.org/abs/2508.12587) 为例，产出一份带原图、比喻、结果表和 FAQ 的中文解读网页。见 `examples/`。
 
 ---
 
-## Design principles
+## 设计原则
 
-- **Explain it to a beginner**: every term gets an explanation and an analogy; equations are translated into plain words.
-- **Honest**: the paper's limitations and failure findings are spelled out, with why they matter.
-- **Self-contained**: images and styles are embedded; openable offline; no external image hosts.
-- **Faithful numbers**: all data defers to the original PDF.
+- **给外行讲**：每个术语都配解释和比喻，公式翻译成人话。
+- **诚实**：论文的局限和失败发现也讲清楚，并说明为什么有价值。
+- **自包含**：图片、样式都内嵌，离线能打开，不依赖外部图床。
+- **数字忠于原文**：所有数据以原始 PDF 为准。
 
 ---
 
