@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+  paper_html template — copy this file as a skeleton and replace the {{...}} placeholders
+  and the example blocks with real content. Styles are self-contained, works offline.
+  Class usage is documented in reference/writing-style.md.
+
+  LANGUAGE: write the actual content in the user's conversation language
+  (Chinese if the user writes in Chinese, otherwise English). Translate the
+  placeholder labels below accordingly.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{Understand XXX in plain words: a one-line hook}}</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --ink:#222b39; --soft:#5c6b82;
+    --line:#e4e8f0; --accent:#3b6ef0; --accent2:#16a085; --warn:#e67e22;
+    --hl:#fff6e5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    line-height:1.85; font-size:17px;}
+  .wrap{max-width:880px; margin:0 auto; padding:32px 22px 80px;}
+  header.hero{background:linear-gradient(135deg,#3b6ef0,#5b3bf0); color:#fff;
+    border-radius:18px; padding:34px 30px; margin-bottom:28px;
+    box-shadow:0 10px 30px rgba(59,110,240,.25);}
+  header.hero h1{margin:0 0 10px; font-size:26px; line-height:1.4;}
+  header.hero .sub{opacity:.92; font-size:15px; margin:4px 0;}
+  .badge{display:inline-block; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.35);
+    padding:3px 10px; border-radius:20px; font-size:13px; margin:6px 6px 0 0;}
+  h2{font-size:22px; margin:38px 0 14px; padding-left:12px; border-left:5px solid var(--accent);}
+  h3{font-size:18px; margin:26px 0 10px; color:#2b3a55;}
+  p{margin:12px 0;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin:18px 0; box-shadow:0 2px 10px rgba(20,40,80,.04);}
+  .tldr{background:#eef3ff; border:1px solid #d3e0ff;}
+  .analogy{background:#eafaf3; border:1px solid #c9eedd;}
+  .analogy h3{color:var(--accent2); margin-top:0;}
+  .analogy h3::before{content:"🌟 ";}
+  .warn{background:var(--hl); border:1px solid #f2dca8;}
+  .warn h3{color:var(--warn); margin-top:0;}
+  .warn h3::before{content:"⚠️ ";}
+  figure{margin:22px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px; background:#fff; padding:8px;}
+  figcaption{font-size:14px; color:var(--soft); margin-top:8px;}
+  .step{display:flex; gap:14px; align-items:flex-start; margin:14px 0;}
+  .step .num{flex:0 0 34px; height:34px; border-radius:50%; background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700;}
+  .step .body{flex:1;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; background:#fff;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:center;}
+  th{background:#eef2fb;}
+  td.l,th.l{text-align:left;}
+  .up{color:#16a085; font-weight:700;}
+  .key{background:#fff2c8; padding:1px 5px; border-radius:4px;}
+  .kv{font-family:ui-monospace,Menlo,Consolas,monospace; color:#3b6ef0;}
+  .pill{display:inline-block; padding:2px 9px; border-radius:14px; font-size:13px; font-weight:600;}
+  .pill.b{background:#e3edff; color:#2c5cd0;}
+  .pill.m{background:#ffe7d6; color:#c2611c;}
+  .note{font-size:14px; color:var(--soft);}
+  hr{border:none; border-top:1px dashed var(--line); margin:34px 0;}
+  .qa{border-left:4px solid var(--accent); padding:4px 0 4px 14px; margin:14px 0;}
+  .qa .q{font-weight:700; color:#2b3a55;}
+  ul.clean{padding-left:20px;} ul.clean li{margin:7px 0;}
+  .toc a{color:var(--accent); text-decoration:none;} .toc li{margin:5px 0;}
+  .foot{font-size:13px; color:var(--soft); text-align:center; margin-top:40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- (1) Hero header -->
+  <header class="hero">
+    <h1>{{Understand XXX in plain words<br>— a one-line subtitle that nails the core}}</h1>
+    <div class="sub">Paper: {{English title}}</div>
+    <div class="sub">Authors: {{authors / affiliation}}</div>
+    <div class="sub">arXiv: {{id}} · {{year}}</div>
+    <div>
+      <span class="badge">{{domain tag 1}}</span>
+      <span class="badge">{{domain tag 2}}</span>
+    </div>
+  </header>
+
+  <!-- (2) One-sentence summary -->
+  <div class="card tldr">
+    <h3>📌 In one sentence (read this first)</h3>
+    <p>{{In the plainest words: what the paper solves, the clever trick it uses, and how well it works.}}</p>
+  </div>
+
+  <!-- (3) Table of contents -->
+  <div class="card toc">
+    <h3>🧭 Contents of this explainer</h3>
+    <ul class="clean">
+      <li><a href="#bg">1. Background: the pain point</a></li>
+      <li><a href="#idea">2. The core idea</a></li>
+      <li><a href="#how">3. How the method works</a></li>
+      <li><a href="#result">4. How well it works</a></li>
+      <li><a href="#limit">5. Limitations / failure findings</a></li>
+      <li><a href="#takeaway">6. Takeaways</a></li>
+      <li><a href="#faq">7. FAQ</a></li>
+    </ul>
+  </div>
+
+  <!-- (4) Background / pain point -->
+  <h2 id="bg">1. Background: the pain point</h2>
+  <p>{{What current approaches do and what's wrong with them.}}</p>
+  <div class="card warn"><h3>Pain point</h3>
+    <ul class="clean"><li>{{pain 1}}</li><li>{{pain 2}}</li></ul>
+  </div>
+  <div class="card analogy"><h3>An analogy</h3>
+    <p>{{Use an everyday example to mirror this pain point.}}</p>
+  </div>
+
+  <!-- (5) Core idea -->
+  <h2 id="idea">2. The core idea</h2>
+  <p>{{The single key idea of the paper and how it differs from prior work.}}</p>
+  <div class="card tldr"><p style="text-align:center;">{{Draw the core mechanism as a one-line flow or comparison}}</p></div>
+
+  <!-- (6) Method / architecture (with figure) -->
+  <h2 id="how">3. How the method works</h2>
+  <figure>
+    <img src="images/{{figure1.png}}" alt="architecture">
+    <figcaption>Figure 1 (original / redrawn): {{what this figure shows and how to read it}}</figcaption>
+  </figure>
+  <div class="card">
+    <div class="step"><div class="num">1</div><div class="body">{{step one}}</div></div>
+    <div class="step"><div class="num">2</div><div class="body">{{step two}}</div></div>
+    <div class="step"><div class="num">3</div><div class="body">{{step three}}</div></div>
+  </div>
+
+  <!-- (7) Results -->
+  <h2 id="result">4. How well it works</h2>
+  <table>
+    <tr><th class="l">Benchmark / dataset</th><th>Baseline</th><th>This method</th><th>Gain</th></tr>
+    <tr><td class="l">{{dataset A}}</td><td>{{x}}</td><td>{{y}}</td><td class="up">↑ {{z}}%</td></tr>
+  </table>
+  <p class="note">Note: {{relative gain ≠ adding that many percentage points; clarify if needed.}}</p>
+
+  <!-- (8) Limitations / failure findings -->
+  <h2 id="limit">5. Limitations / failure findings</h2>
+  <div class="card warn"><h3>{{An honest finding}}</h3>
+    <p>{{Spell out its shortcoming/failure, and why it's still valuable.}}</p>
+  </div>
+
+  <!-- (9) Takeaways -->
+  <h2 id="takeaway">6. Takeaways</h2>
+  <div class="card tldr"><ul class="clean">
+    <li>✅ {{what they did}}</li>
+    <li>✅ {{what it's good for}}</li>
+    <li>⚠️ {{what problem remains}}</li>
+  </ul></div>
+
+  <!-- (10) FAQ -->
+  <h2 id="faq">7. FAQ</h2>
+  <div class="qa"><p class="q">Q1: {{the question a layperson would most likely ask}}</p><p>{{answer}}</p></div>
+  <div class="qa"><p class="q">Q2: {{…}}</p><p>{{answer}}</p></div>
+
+  <hr>
+  <div class="card"><h3>📂 Companion files</h3>
+    <ul class="clean">
+      <li><b>pdf/</b> — original paper PDF</li>
+      <li><b>tex/</b> — arXiv LaTeX source (with original figures)</li>
+      <li><b>html/</b> — this explainer + images/</li>
+    </ul>
+  </div>
+
+  <p class="foot">This page is a plain-language explainer of the paper; figures are from the original (arXiv: {{id}}). All numbers defer to the original PDF.</p>
+
+</div>
+</body>
+</html>
